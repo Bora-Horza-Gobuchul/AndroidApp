@@ -1,14 +1,11 @@
 package com.example.androidapp;
 
-import android.content.ContextWrapper;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,9 +21,6 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.os.SystemClock.sleep;
 
 public class MainActivity extends AppCompatActivity {
-
-    // Initializing all variables..
-    private TextView startTV, stopTV, playTV, stopplayTV, statusTV;
 
     // creating a variable for media recorder object class.
     private MediaRecorder mRecorder;
@@ -45,12 +39,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        startRecording();
-        sleep(10000);
-        pauseRecording();
-        playAudio();
-
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Log.e("Thread in onCreate:", "horam");
+                    startRecording();
+                    sleep(10000);
+                    stopRecording();
+                    //playAudio();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
 
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
             mFileName += "/AudioRecording.mp3";
 
-            Log.e("TAG", Environment.getExternalStorageDirectory().getAbsolutePath() + " : " + Environment.getExternalStorageDirectory().canWrite());
+            Log.e("startRecording()", Environment.getExternalStorageDirectory().getAbsolutePath() + " : " + Environment.getExternalStorageDirectory().canWrite());
 
             // below method is used to initialize
             // the media recorder class
@@ -164,10 +166,9 @@ public class MainActivity extends AppCompatActivity {
             Log.e("TAG", "prepare() failed");
         }
 
-        new UploadFileTask(this).execute(mFileName);
     }
 
-    public void pauseRecording() {
+    public void stopRecording() {
 
         // below method will stop
         // the audio recording.
@@ -178,12 +179,8 @@ public class MainActivity extends AppCompatActivity {
         // the media recorder class.
         mRecorder.release();
         mRecorder = null;
+
+        new UploadFileTask(this).execute(mFileName);
     }
 
-    public void pausePlaying() {
-        // this method will release the media player
-        // class and pause the playing of our recorded audio.
-        mPlayer.release();
-        mPlayer = null;
-    }
 }

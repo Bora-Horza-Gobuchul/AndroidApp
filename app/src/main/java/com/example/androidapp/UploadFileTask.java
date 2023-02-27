@@ -19,6 +19,8 @@ public class UploadFileTask extends AsyncTask<String, Void, Boolean> {
     private Context context;
     private static final String TAG = "UploadFileTask";
 
+    private static final String serverUrl = "http://10.0.2.2:5000/upload_audio";
+
     public UploadFileTask(Context context) {
         this.context = context;
     }
@@ -26,7 +28,7 @@ public class UploadFileTask extends AsyncTask<String, Void, Boolean> {
     @Override
     protected Boolean doInBackground(String... params) {
         String filePath = params[0];
-        String serverUrl = "http://10.0.2.2:5000/upload_audio";
+
 
         int serverResponseCode = 0;
         String serverResponseMessage = null;
@@ -124,7 +126,7 @@ public class UploadFileTask extends AsyncTask<String, Void, Boolean> {
             Log.i(TAG, "File uploaded successfully: " + serverResponseMessage);
             return true;
         } else {
-            Log.e(TAG, "Server returned non-OK response code: " + serverResponseCode);
+            Log.e(TAG, "Server returned non-OK response code: " + serverResponseCode + serverResponseMessage);
             return false;
         }
     }
