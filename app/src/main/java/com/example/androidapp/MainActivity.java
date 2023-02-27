@@ -21,6 +21,7 @@ import java.io.IOException;
 
 import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.os.SystemClock.sleep;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,49 +45,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // initialize all variables with their layout items.
-        statusTV = findViewById(R.id.idTVstatus);
-        startTV = findViewById(R.id.btnRecord);
-        stopTV = findViewById(R.id.btnStop);
-        playTV = findViewById(R.id.btnPlay);
-        stopplayTV = findViewById(R.id.btnStopPlay);
-        stopTV.setBackgroundColor(getResources().getColor(R.color.gray));
-        playTV.setBackgroundColor(getResources().getColor(R.color.gray));
-        stopplayTV.setBackgroundColor(getResources().getColor(R.color.gray));
 
-        startTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // start recording method will
-                // start the recording of audio.
-                startRecording();
-            }
-        });
-        stopTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // pause Recording method will
-                // pause the recording of audio.
-                pauseRecording();
-
-            }
-        });
-        playTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // play audio method will play
-                // the audio which we have recorded
-                playAudio();
-            }
-        });
-        stopplayTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // pause play method will
-                // pause the play of audio
-                pausePlaying();
-            }
-        });
+        startRecording();
+        sleep(10000);
+        pauseRecording();
+        playAudio();
 
     }
 
@@ -97,12 +60,6 @@ public class MainActivity extends AppCompatActivity {
         // to record and store the audio.
         if (CheckPermissions()) {
 
-            // setbackgroundcolor method will change
-            // the background color of text view.
-            stopTV.setBackgroundColor(getResources().getColor(R.color.purple_200));
-            startTV.setBackgroundColor(getResources().getColor(R.color.gray));
-            playTV.setBackgroundColor(getResources().getColor(R.color.gray));
-            stopplayTV.setBackgroundColor(getResources().getColor(R.color.gray));
 
             // we are here initializing our filename variable
             // with the path of the recorded audio file.
@@ -140,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
             // start method will start
             // the audio recording.
             mRecorder.start();
-            statusTV.setText("Recording Started");
         } else {
             // if audio recording permissions are
             // not granted by user below method will
@@ -184,11 +140,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void playAudio() {
-        stopTV.setBackgroundColor(getResources().getColor(R.color.gray));
-        startTV.setBackgroundColor(getResources().getColor(R.color.purple_200));
-        playTV.setBackgroundColor(getResources().getColor(R.color.gray));
-        stopplayTV.setBackgroundColor(getResources().getColor(R.color.purple_200));
-
 
         // for playing our recorded audio
         // we are using media player class.
@@ -209,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
 
             // below method will start our media player.
             mPlayer.start();
-            statusTV.setText("Recording Started Playing");
         } catch (IOException e) {
             Log.e("TAG", "prepare() failed");
         }
@@ -218,10 +168,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pauseRecording() {
-        stopTV.setBackgroundColor(getResources().getColor(R.color.gray));
-        startTV.setBackgroundColor(getResources().getColor(R.color.purple_200));
-        playTV.setBackgroundColor(getResources().getColor(R.color.purple_200));
-        stopplayTV.setBackgroundColor(getResources().getColor(R.color.purple_200));
 
         // below method will stop
         // the audio recording.
@@ -232,7 +178,6 @@ public class MainActivity extends AppCompatActivity {
         // the media recorder class.
         mRecorder.release();
         mRecorder = null;
-        statusTV.setText("Recording Stopped");
     }
 
     public void pausePlaying() {
@@ -240,10 +185,5 @@ public class MainActivity extends AppCompatActivity {
         // class and pause the playing of our recorded audio.
         mPlayer.release();
         mPlayer = null;
-        stopTV.setBackgroundColor(getResources().getColor(R.color.gray));
-        startTV.setBackgroundColor(getResources().getColor(R.color.purple_200));
-        playTV.setBackgroundColor(getResources().getColor(R.color.purple_200));
-        stopplayTV.setBackgroundColor(getResources().getColor(R.color.gray));
-        statusTV.setText("Recording Play Stopped");
     }
 }
