@@ -22,12 +22,12 @@
 
     <WebView
         android:id="@+id/webview"
-        android:layout_width="323dp"
-        android:layout_height="527dp"
+        android:layout_width="390dp"
+        android:layout_height="679dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="94dp" />
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="16dp" />
 
     <!--This will display the status of our app when
         we will record some audio and play that audio-->

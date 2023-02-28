@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_AUDIO_PERMISSION_CODE = 1;
 
     WebView webView;
-    String html = "<iframe width=\"450\" height=\"260\" style=\"border: 1px solid #cccccc;\" src=\"https://www.wikipedia.org/\" ></iframe>";
+    String html = "<iframe width=\"100%\" height=\"100%\" style=\"border: 1px solid #cccccc;\" src=\"https://www.wikipedia.org/\" ></iframe>";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
