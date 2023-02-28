@@ -10,24 +10,19 @@
     tools:context=".MainActivity">
 
     <!--Heading Text View-->
-    <TextView
-        android:id="@+id/txthead"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/audio_recorder"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="30sp" />
 
     <WebView
         android:id="@+id/webview"
-        android:layout_width="390dp"
-        android:layout_height="679dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp" />
 
     <!--This will display the status of our app when
         we will record some audio and play that audio-->

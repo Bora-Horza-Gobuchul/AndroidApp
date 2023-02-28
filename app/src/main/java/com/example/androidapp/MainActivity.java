@@ -6,6 +6,7 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Window;
 import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,12 +37,14 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_AUDIO_PERMISSION_CODE = 1;
 
     WebView webView;
-    String html = "<iframe width=\"100%\" height=\"100%\" style=\"border: 1px solid #cccccc;\" src=\"https://www.wikipedia.org/\" ></iframe>";
+    String html = "<iframe width=\"100%\" height=\"100%\" src=\"https://meditik.medical.idf.il/home\" ></iframe>";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         webView = (WebView) findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
