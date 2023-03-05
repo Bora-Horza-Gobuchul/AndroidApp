@@ -6,9 +6,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:context=".MainActivity">
 
+    tools:context=".MainActivity">
+<!--    android:orientation="horizontal"-->
     <!--Heading Text View-->
 
     <WebView
@@ -24,9 +24,4 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="0dp" />
 
-    <!--This will display the status of our app when
-        we will record some audio and play that audio-->
-
-    <!--Linear Layout for adding textviews
-        in horizontal manner-->
 </RelativeLayout>

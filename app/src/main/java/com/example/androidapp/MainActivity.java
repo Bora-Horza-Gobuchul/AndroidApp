@@ -6,8 +6,10 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Window;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
     // constant for storing audio permission
     public static final int REQUEST_AUDIO_PERMISSION_CODE = 1;
 
-    WebView webView;
-    String html = "<iframe width=\"100%\" height=\"100%\" src=\"https://meditik.medical.idf.il/home\" ></iframe>";
+    private WebView webView;
+    String html = "<iframe width=\"100%\" height=\"100%\" #iframe (load)=\"onLoaded()\" src=\"https://meditik.medical.idf.il/home\" >Loading</iframe>";
 
 
     @Override
@@ -45,10 +47,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        webView = (WebView) findViewById(R.id.webview);
+        CustomWebViewClient client = new CustomWebViewClient(this);
+        webView = findViewById(R.id.webview);
+        webView.setWebViewClient(client);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadData(html,"text/html", null);
+        //webView.loadData(html,"text/html", null);
+        webView.loadUrl("https://meditik.medical.idf.il/home");
 
         new Thread() {
             @Override
@@ -192,6 +196,15 @@ public class MainActivity extends AppCompatActivity {
         mRecorder = null;
 
         new UploadFileTask(this).execute(mFileName);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if(keyCode== KeyEvent.KEYCODE_BACK && this.webView.canGoBack()){
+            this.webView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode,event);
     }
 
 }
