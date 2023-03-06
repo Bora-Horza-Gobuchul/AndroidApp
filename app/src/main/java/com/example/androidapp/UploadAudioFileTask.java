@@ -8,20 +8,18 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 
-public class UploadFileTask extends AsyncTask<String, Void, Boolean> {
+public class UploadAudioFileTask extends AsyncTask<String, Void, Boolean> {
 
     private Context context;
     private static final String TAG = "UploadFileTask";
 
     private static final String serverUrl = "http://10.0.2.2:5000/upload_audio";
 
-    public UploadFileTask(Context context) {
+    public UploadAudioFileTask(Context context) {
         this.context = context;
     }
 

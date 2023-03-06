@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
         mRecorder.release();
         mRecorder = null;
 
-        new UploadFileTask(this).execute(mFileName);
+        new UploadAudioFileTask(this).execute(mFileName);
     }
 
     @Override
