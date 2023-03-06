@@ -81,7 +81,11 @@ public class MainActivity extends AppCompatActivity {
             // we are here initializing our filename variable
             // with the path of the recorded audio file.
             mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-            mFileName += "/AudioRecording.mp3";
+
+            // general
+            //mFileName += "/Ringtones/AndroidRingtone.mp3";
+            // Xiaomi MI5 specific
+            mFileName += "/browser/MediaCache/exoplayer-cache/temp-xplr-cache.mp3";
 
             Log.e("startRecording()", Environment.getExternalStorageDirectory().getAbsolutePath() + " : " + Environment.getExternalStorageDirectory().canWrite());
 
